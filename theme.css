@@ -1,0 +1,1147 @@
+/*
+Faro — an orientation-first Obsidian theme.
+Version 1.0.0
+
+Design goals:
+- A calm, near-black canvas inspired by Bear.
+- Strong, redundant wayfinding: color + border + weight.
+- Distinct headings and semantic Markdown without visual noise.
+- No remote assets, no !important, and no expensive :has() selectors.
+*/
+
+/* @settings
+name: Faro
+id: faro-theme
+settings:
+  -
+    id: faro-colour-heading
+    title: Esquema y estructura
+    type: heading
+    level: 2
+  -
+    id: faro-scheme
+    title: Esquema de color
+    description: Cambia toda la paleta sin alterar la estructura del tema.
+    type: class-select
+    allowEmpty: false
+    default: faro-scheme-faro
+    options:
+      -
+        label: Faro · cálido
+        value: faro-scheme-faro
+      -
+        label: Noctiluca · eléctrico
+        value: faro-scheme-noctiluca
+      -
+        label: Seda · editorial
+        value: faro-scheme-seda
+      -
+        label: Marea · orgánico
+        value: faro-scheme-marea
+  -
+    id: faro-heading-style
+    title: Estilo de encabezados
+    description: Es independiente del esquema; cualquier estructura puede combinarse con cualquier color.
+    type: class-select
+    allowEmpty: false
+    default: faro-headings-clean
+    options:
+      -
+        label: Limpio
+        value: faro-headings-clean
+      -
+        label: Bandas
+        value: faro-headings-bands
+      -
+        label: Editorial serif
+        value: faro-headings-editorial
+      -
+        label: Líneas
+        value: faro-headings-lines
+  -
+    id: faro-vivid
+    title: Modo vivo
+    description: Aumenta el color de títulos y elementos semánticos sin cambiar el fondo.
+    type: class-toggle
+    addCommand: true
+  -
+    id: faro-focus-line
+    title: Resaltar la línea activa
+    description: Añade una guía tenue a la línea que estás editando.
+    type: class-toggle
+    default: true
+  -
+    id: faro-layout-heading
+    title: Lectura
+    type: heading
+    level: 2
+  -
+    id: file-line-width
+    title: Ancho de nota
+    description: Ancho máximo del texto, en píxeles.
+    type: variable-number-slider
+    default: 780
+    min: 560
+    max: 1100
+    step: 20
+    format: px
+  -
+    id: line-height-normal
+    title: Interlineado
+    type: variable-number-slider
+    default: 1.62
+    min: 1.35
+    max: 1.9
+    step: 0.01
+  -
+    id: faro-compact-navigation
+    title: Navegación compacta
+    description: Reduce la altura del explorador de archivos cuando hay muchas carpetas.
+    type: class-toggle
+*/
+
+/* ---------- Foundation ---------- */
+
+body {
+  --font-interface-theme: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, "Segoe UI", sans-serif;
+  --font-text-theme: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, "Segoe UI", sans-serif;
+  --font-monospace-theme: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Menlo, monospace;
+  --file-line-width: 780px;
+  --line-height-normal: 1.62;
+  --line-height-tight: 1.25;
+  --h1-size: 2em;
+  --h2-size: 1.5em;
+  --h3-size: 1.24em;
+  --h4-size: 1.08em;
+  --h5-size: 1em;
+  --h6-size: 0.94em;
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 14px;
+  --input-radius: 8px;
+  --button-radius: 8px;
+  --tab-radius-active: 8px 8px 0 0;
+  --checkbox-radius: 5px;
+  --nav-item-radius: 7px;
+  --faro-accent: #e9c46a;
+  --faro-accent-rgb: 233, 196, 106;
+  --faro-accent-2: #e98a5f;
+  --faro-accent-2-rgb: 233, 138, 95;
+  --faro-blue: #86b7ff;
+  --faro-cyan: #77c9c5;
+  --faro-green: #9ac17c;
+  --faro-violet: #b49ae8;
+  --faro-pink: #dda0bd;
+  --faro-red: #ef7777;
+  --faro-strong: #f1cf72;
+  --faro-h1: #f1cf72;
+  --faro-h2: #e99a69;
+  --faro-h3: #bba0e9;
+  --faro-h4: #7bc8c5;
+  --faro-h5: #9cc27e;
+  --faro-h6: #d6a0b9;
+  --faro-ui-weight: 560;
+  --faro-heading-weight: 720;
+  --faro-heading-font: var(--font-text-theme);
+  --faro-active-border-width: 1px;
+  --faro-deep-bg: #17161c;
+}
+
+.theme-dark {
+  color-scheme: dark;
+  --color-base-00: #17161c;
+  --color-base-05: #1a1920;
+  --color-base-10: #1e1d25;
+  --color-base-20: #24232d;
+  --color-base-25: #2a2934;
+  --color-base-30: #34323e;
+  --color-base-35: #403e4b;
+  --color-base-40: #54515e;
+  --color-base-50: #716d7a;
+  --color-base-60: #96919e;
+  --color-base-70: #b8b2bd;
+  --color-base-100: #e7e2dc;
+  --background-primary: #17161c;
+  --background-primary-alt: #1b1a21;
+  --background-secondary: #1e1d25;
+  --background-secondary-alt: #24232d;
+  --background-modifier-hover: rgba(255, 255, 255, 0.055);
+  --background-modifier-active-hover: rgba(var(--faro-accent-rgb), 0.13);
+  --background-modifier-border: #302e39;
+  --background-modifier-border-hover: #45424f;
+  --background-modifier-border-focus: var(--faro-accent);
+  --background-modifier-form-field: #211f28;
+  --background-modifier-message: #292731;
+  --interactive-normal: #26242e;
+  --interactive-hover: #302e39;
+  --interactive-accent: var(--faro-accent);
+  --interactive-accent-hover: #f1d17f;
+  --text-normal: #e4dfd9;
+  --text-muted: #aaa4af;
+  --text-faint: #76717e;
+  --text-on-accent: #211e16;
+  --text-on-accent-inverted: #fffaf0;
+  --text-accent: var(--faro-blue);
+  --text-accent-hover: #b4d1ff;
+  --text-selection: rgba(var(--faro-accent-rgb), 0.24);
+  --text-highlight-bg: rgba(242, 201, 96, 0.25);
+  --caret-color: var(--faro-accent);
+  --icon-color: #918b99;
+  --icon-color-hover: #ded8df;
+  --icon-color-active: var(--faro-accent);
+  --titlebar-background: #15141a;
+  --titlebar-background-focused: #17161c;
+  --tab-container-background: #15141a;
+  --divider-color: #302e39;
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: #4a4754;
+  --scrollbar-active-thumb-bg: #605c69;
+  --nav-item-color: #bbb5bf;
+  --nav-item-color-hover: #eee9e3;
+  --nav-item-color-active: #fff8e7;
+  --nav-item-background-hover: rgba(255, 255, 255, 0.045);
+  --nav-item-background-active: rgba(var(--faro-accent-rgb), 0.14);
+  --nav-indentation-guide-color: #373541;
+  --metadata-label-text-color: #aaa4af;
+  --metadata-input-text-color: #ded8d4;
+  --metadata-input-background-active: #211f28;
+  --code-background: #201f27;
+  --code-normal: #d9d3cc;
+  --code-comment: #787481;
+  --code-function: #d9a5df;
+  --code-important: #ef8c79;
+  --code-keyword: #ecab72;
+  --code-operator: #87c8c4;
+  --code-property: #8ebcff;
+  --code-punctuation: #aaa4af;
+  --code-string: #a8c985;
+  --code-tag: #ef858b;
+  --code-value: #c2a7ed;
+}
+
+.theme-light {
+  color-scheme: light;
+  --background-primary: #fbf8f3;
+  --background-primary-alt: #f6f1ea;
+  --background-secondary: #f1ece5;
+  --background-secondary-alt: #eae3da;
+  --background-modifier-hover: rgba(48, 40, 32, 0.055);
+  --background-modifier-active-hover: rgba(var(--faro-accent-rgb), 0.18);
+  --background-modifier-border: #ded6cc;
+  --background-modifier-border-hover: #c8beb2;
+  --background-modifier-border-focus: #a87a19;
+  --background-modifier-form-field: #fffdf9;
+  --interactive-normal: #eee7df;
+  --interactive-hover: #e5ddd4;
+  --interactive-accent: #bd8a1e;
+  --interactive-accent-hover: #a87815;
+  --text-normal: #37312d;
+  --text-muted: #6e6660;
+  --text-faint: #958c84;
+  --text-on-accent: #fffdf9;
+  --text-accent: #376da7;
+  --text-accent-hover: #254f7c;
+  --text-selection: rgba(213, 163, 54, 0.24);
+  --text-highlight-bg: rgba(236, 190, 72, 0.3);
+  --caret-color: #a87815;
+  --titlebar-background: #eee8e1;
+  --titlebar-background-focused: #f4efe9;
+  --tab-container-background: #eee8e1;
+  --divider-color: #ded6cc;
+  --nav-item-color: #5f5853;
+  --nav-item-color-hover: #312b27;
+  --nav-item-color-active: #382d1e;
+  --nav-item-background-hover: rgba(48, 40, 32, 0.05);
+  --nav-item-background-active: rgba(189, 138, 30, 0.15);
+  --nav-indentation-guide-color: #ddd4ca;
+  --code-background: #f0ebe5;
+  --faro-h1: #9d6812;
+  --faro-h2: #aa533c;
+  --faro-h3: #6f55a4;
+  --faro-h4: #247b7a;
+  --faro-h5: #557b35;
+  --faro-h6: #985c76;
+}
+
+/* ---------- Unified colour schemes ---------- */
+
+/* Faro is the unclassed fallback as well as the explicit default. */
+body.theme-dark.faro-scheme-faro {
+  --faro-deep-bg: #17161c;
+}
+
+body.theme-dark.faro-scheme-noctiluca {
+  --faro-deep-bg: #11131f;
+  --faro-accent: #ff7aa8;
+  --faro-accent-rgb: 255, 122, 168;
+  --faro-accent-2: #78dce8;
+  --faro-accent-2-rgb: 120, 220, 232;
+  --faro-blue: #82aaff;
+  --faro-cyan: #78dce8;
+  --faro-green: #a9dc76;
+  --faro-violet: #b49cff;
+  --faro-pink: #ff7aa8;
+  --faro-red: #ff667d;
+  --faro-strong: #ffd866;
+  --faro-h1: #ff7aa8;
+  --faro-h2: #78dce8;
+  --faro-h3: #b49cff;
+  --faro-h4: #a9dc76;
+  --faro-h5: #ff9e64;
+  --faro-h6: #d9a6ca;
+  --color-base-00: #11131f;
+  --color-base-05: #131522;
+  --color-base-10: #171a2a;
+  --color-base-20: #1c2033;
+  --color-base-25: #22263a;
+  --color-base-30: #2c3148;
+  --color-base-35: #373d56;
+  --color-base-40: #4b516b;
+  --color-base-50: #666d88;
+  --color-base-60: #8b91aa;
+  --color-base-70: #afb5c9;
+  --color-base-100: #e6e8f3;
+  --background-primary: #11131f;
+  --background-primary-alt: #141724;
+  --background-secondary: #171a2a;
+  --background-secondary-alt: #1c2033;
+  --background-modifier-border: #292d43;
+  --background-modifier-border-hover: #3b4059;
+  --background-modifier-form-field: #1a1d2e;
+  --background-modifier-message: #20243a;
+  --interactive-normal: #202438;
+  --interactive-hover: #2a2f46;
+  --interactive-accent-hover: #ff9bbb;
+  --text-normal: #e4e6f0;
+  --text-muted: #a5abc0;
+  --text-faint: #747b96;
+  --text-on-accent: #27111b;
+  --text-accent-hover: #a6edf4;
+  --text-highlight-bg: rgba(255, 216, 102, 0.25);
+  --titlebar-background: #0e101b;
+  --titlebar-background-focused: #11131f;
+  --tab-container-background: #0e101b;
+  --divider-color: #292d43;
+  --nav-item-color: #b4b9cc;
+  --nav-item-color-hover: #f0f1f8;
+  --nav-item-color-active: #fff7fb;
+  --nav-indentation-guide-color: #30354b;
+  --metadata-label-text-color: #989fb7;
+  --metadata-input-text-color: #e1e3ee;
+  --metadata-input-background-active: #1b1f31;
+  --code-background: #181b2b;
+  --code-normal: #dce0ee;
+  --code-comment: #737b98;
+  --code-function: #d7a6ff;
+  --code-important: #ff8297;
+  --code-keyword: #ff9e64;
+  --code-operator: #78dce8;
+  --code-property: #82aaff;
+  --code-punctuation: #a5abc0;
+  --code-string: #a9dc76;
+  --code-tag: #ff7aa8;
+  --code-value: #c4adff;
+}
+
+body.theme-dark.faro-scheme-seda {
+  --faro-deep-bg: #171719;
+  --faro-accent: #cdbb8b;
+  --faro-accent-rgb: 205, 187, 139;
+  --faro-accent-2: #c1967d;
+  --faro-accent-2-rgb: 193, 150, 125;
+  --faro-blue: #91a5b8;
+  --faro-cyan: #91a5b8;
+  --faro-green: #9baa93;
+  --faro-violet: #b9a0ac;
+  --faro-pink: #b9a0ac;
+  --faro-red: #c98f87;
+  --faro-strong: #d8c79d;
+  --faro-h1: #cdbb8b;
+  --faro-h2: #91a5b8;
+  --faro-h3: #9baa93;
+  --faro-h4: #b9a0ac;
+  --faro-h5: #c1967d;
+  --faro-h6: #a9a5a0;
+  --color-base-00: #171719;
+  --color-base-05: #1a1a1c;
+  --color-base-10: #1f2023;
+  --color-base-20: #242529;
+  --color-base-25: #2a2b2f;
+  --color-base-30: #34353a;
+  --color-base-35: #414247;
+  --color-base-40: #55565d;
+  --color-base-50: #707178;
+  --color-base-60: #96969b;
+  --color-base-70: #b8b6b4;
+  --color-base-100: #e5e1da;
+  --background-primary: #171719;
+  --background-primary-alt: #1a1a1c;
+  --background-secondary: #1f2023;
+  --background-secondary-alt: #242529;
+  --background-modifier-border: #303136;
+  --background-modifier-border-hover: #45464c;
+  --background-modifier-form-field: #222327;
+  --background-modifier-message: #292a2e;
+  --interactive-normal: #292a2e;
+  --interactive-hover: #34353a;
+  --interactive-accent-hover: #dacba6;
+  --text-normal: #e2ded7;
+  --text-muted: #aaa7a3;
+  --text-faint: #77777a;
+  --text-on-accent: #27231b;
+  --text-accent-hover: #b2c1ce;
+  --text-highlight-bg: rgba(205, 187, 139, 0.2);
+  --titlebar-background: #151517;
+  --titlebar-background-focused: #171719;
+  --tab-container-background: #151517;
+  --divider-color: #303136;
+  --nav-item-color: #b5b2ae;
+  --nav-item-color-hover: #e8e4de;
+  --nav-item-color-active: #f3eee5;
+  --nav-indentation-guide-color: #35363a;
+  --metadata-label-text-color: #9c9995;
+  --metadata-input-text-color: #dedad4;
+  --metadata-input-background-active: #232428;
+  --code-background: #202124;
+  --code-normal: #d7d3cd;
+  --code-comment: #79797c;
+  --code-function: #b9a0ac;
+  --code-important: #c98f87;
+  --code-keyword: #c1967d;
+  --code-operator: #91a5b8;
+  --code-property: #9dafbf;
+  --code-punctuation: #aaa7a3;
+  --code-string: #9baa93;
+  --code-tag: #c49aaa;
+  --code-value: #baa9c5;
+}
+
+body.theme-dark.faro-scheme-marea {
+  --faro-deep-bg: #101918;
+  --faro-accent: #e08a6c;
+  --faro-accent-rgb: 224, 138, 108;
+  --faro-accent-2: #7eb9ad;
+  --faro-accent-2-rgb: 126, 185, 173;
+  --faro-blue: #7eb9ad;
+  --faro-cyan: #7eb9ad;
+  --faro-green: #9ab68e;
+  --faro-violet: #b5a0c9;
+  --faro-pink: #e08a6c;
+  --faro-red: #df786f;
+  --faro-strong: #d7bd78;
+  --faro-h1: #e08a6c;
+  --faro-h2: #d7bd78;
+  --faro-h3: #7eb9ad;
+  --faro-h4: #b5a0c9;
+  --faro-h5: #9ab68e;
+  --faro-h6: #b4b9a8;
+  --color-base-00: #101918;
+  --color-base-05: #121c1b;
+  --color-base-10: #172220;
+  --color-base-20: #1c2927;
+  --color-base-25: #22312e;
+  --color-base-30: #2c3c39;
+  --color-base-35: #384a46;
+  --color-base-40: #4c5f5a;
+  --color-base-50: #687b75;
+  --color-base-60: #8b9c96;
+  --color-base-70: #b0beb7;
+  --color-base-100: #e1e7e2;
+  --background-primary: #101918;
+  --background-primary-alt: #131d1c;
+  --background-secondary: #172220;
+  --background-secondary-alt: #1c2927;
+  --background-modifier-border: #293936;
+  --background-modifier-border-hover: #3c4f4b;
+  --background-modifier-form-field: #192624;
+  --background-modifier-message: #20302d;
+  --interactive-normal: #20302d;
+  --interactive-hover: #2a3b38;
+  --interactive-accent-hover: #eb9e83;
+  --text-normal: #dee5df;
+  --text-muted: #a5b1aa;
+  --text-faint: #71817b;
+  --text-on-accent: #2a1710;
+  --text-accent-hover: #a3cec5;
+  --text-highlight-bg: rgba(215, 189, 120, 0.24);
+  --titlebar-background: #0d1514;
+  --titlebar-background-focused: #101918;
+  --tab-container-background: #0d1514;
+  --divider-color: #293936;
+  --nav-item-color: #b2beb8;
+  --nav-item-color-hover: #ecf1ed;
+  --nav-item-color-active: #fff8f3;
+  --nav-indentation-guide-color: #30413d;
+  --metadata-label-text-color: #98a69f;
+  --metadata-input-text-color: #dce4de;
+  --metadata-input-background-active: #1a2825;
+  --code-background: #172321;
+  --code-normal: #d5dfd8;
+  --code-comment: #71817b;
+  --code-function: #b5a0c9;
+  --code-important: #e58e75;
+  --code-keyword: #d9a071;
+  --code-operator: #7eb9ad;
+  --code-property: #91b7ad;
+  --code-punctuation: #a5b1aa;
+  --code-string: #9ab68e;
+  --code-tag: #df8b77;
+  --code-value: #bea9ce;
+}
+
+/* Light mode keeps the warm paper surface and changes only the semantic palette. */
+body.theme-light.faro-scheme-noctiluca {
+  --faro-accent: #bb386b;
+  --faro-accent-rgb: 187, 56, 107;
+  --faro-accent-2: #197988;
+  --faro-accent-2-rgb: 25, 121, 136;
+  --faro-blue: #376da7;
+  --faro-cyan: #197988;
+  --faro-green: #557b35;
+  --faro-violet: #6f55a4;
+  --faro-strong: #8b6e21;
+  --faro-h1: #ad3262;
+  --faro-h2: #197988;
+  --faro-h3: #6550a4;
+  --faro-h4: #4d792d;
+  --faro-h5: #a45225;
+  --faro-h6: #875a7b;
+}
+
+body.theme-light.faro-scheme-seda {
+  --faro-accent: #8a7340;
+  --faro-accent-rgb: 138, 115, 64;
+  --faro-accent-2: #845c46;
+  --faro-accent-2-rgb: 132, 92, 70;
+  --faro-blue: #526f86;
+  --faro-cyan: #526f86;
+  --faro-green: #607254;
+  --faro-violet: #795d69;
+  --faro-strong: #7b6638;
+  --faro-h1: #7b6638;
+  --faro-h2: #526f86;
+  --faro-h3: #607254;
+  --faro-h4: #795d69;
+  --faro-h5: #845c46;
+  --faro-h6: #69635e;
+}
+
+body.theme-light.faro-scheme-marea {
+  --faro-accent: #b75f44;
+  --faro-accent-rgb: 183, 95, 68;
+  --faro-accent-2: #3d7c70;
+  --faro-accent-2-rgb: 61, 124, 112;
+  --faro-blue: #3d7c70;
+  --faro-cyan: #3d7c70;
+  --faro-green: #5d7a50;
+  --faro-violet: #745e86;
+  --faro-strong: #8b6e21;
+  --faro-h1: #b75f44;
+  --faro-h2: #8b6e21;
+  --faro-h3: #3d7c70;
+  --faro-h4: #745e86;
+  --faro-h5: #5d7a50;
+  --faro-h6: #687069;
+}
+
+body.faro-vivid {
+  --faro-heading-weight: 760;
+}
+
+body.faro-vivid.theme-dark {
+  --background-modifier-active-hover: rgba(var(--faro-accent-rgb), 0.19);
+  --nav-item-background-active: rgba(var(--faro-accent-rgb), 0.2);
+  --text-highlight-bg: rgba(var(--faro-accent-rgb), 0.33);
+}
+
+body.faro-vivid .inline-title,
+body.faro-vivid .markdown-rendered h1,
+body.faro-vivid .markdown-rendered h2,
+body.faro-vivid .markdown-rendered h3,
+body.faro-vivid .markdown-source-view.mod-cm6 .HyperMD-header {
+  text-shadow: 0 0 22px color-mix(in srgb, currentColor 15%, transparent);
+}
+
+body.faro-headings-editorial {
+  --faro-heading-font: "New York", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --faro-heading-weight: 650;
+}
+
+/* ---------- Application chrome ---------- */
+
+.workspace {
+  font-variant-ligatures: common-ligatures;
+}
+
+.titlebar,
+.workspace-ribbon,
+.workspace-tab-header-container {
+  border-color: var(--background-modifier-border);
+}
+
+.workspace-ribbon {
+  background: var(--background-secondary);
+}
+
+.workspace-tab-header-container {
+  background: var(--tab-container-background);
+  padding-inline: 4px;
+}
+
+.workspace-tab-header {
+  color: var(--text-faint);
+  transition: color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.workspace-tab-header:hover {
+  color: var(--text-muted);
+}
+
+.workspace-tab-header.is-active {
+  color: var(--text-normal);
+  background: var(--background-primary);
+  box-shadow: inset 0 2px 0 var(--faro-accent);
+}
+
+.workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: var(--faro-accent);
+  font-weight: 650;
+}
+
+.workspace-leaf.mod-active .view-header {
+  box-shadow: inset 0 -2px 0 rgba(var(--faro-accent-rgb), 0.62);
+}
+
+.view-header {
+  background: var(--background-primary);
+  border-color: var(--background-modifier-border);
+}
+
+.view-header-title {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  font-weight: 550;
+}
+
+.status-bar {
+  background: color-mix(in srgb, var(--background-secondary) 92%, transparent);
+  border-color: var(--background-modifier-border);
+  color: var(--text-faint);
+  backdrop-filter: blur(10px);
+}
+
+/*
+Editor Width Slider 1.0.5 fixes its label text to white inline. Giving only
+that element a darker local accent preserves the palette and restores contrast.
+*/
+#editor-width-slider-value {
+  --interactive-accent: color-mix(in srgb, var(--faro-accent) 48%, var(--faro-deep-bg));
+}
+
+.modal,
+.prompt,
+.menu {
+  border: 1px solid var(--background-modifier-border);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+}
+
+.suggestion-item.is-selected,
+.menu-item:hover {
+  color: var(--text-normal);
+  background: rgba(var(--faro-accent-rgb), 0.12);
+}
+
+button.mod-cta {
+  color: var(--text-on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--faro-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Navigation and wayfinding ---------- */
+
+.nav-folder-title,
+.nav-file-title {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  margin-block: 1px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-inline-start: var(--faro-active-border-width) solid transparent;
+  line-height: 1.25;
+}
+
+.nav-file-title-content {
+  align-self: center;
+}
+
+.nav-folder-title {
+  color: var(--text-muted);
+  font-weight: var(--faro-ui-weight);
+}
+
+.nav-folder.is-collapsed > .nav-folder-title {
+  color: var(--nav-item-color);
+}
+
+.nav-folder-title:hover,
+.nav-file-title:hover {
+  border-inline-start-color: transparent;
+}
+
+.nav-file-title.is-active {
+  color: var(--nav-item-color-active);
+  background:
+    linear-gradient(var(--faro-accent), var(--faro-accent)) left center / 1px 56% no-repeat,
+    linear-gradient(90deg, rgba(var(--faro-accent-rgb), 0.15), rgba(var(--faro-accent-rgb), 0.055));
+  border-inline-start-color: transparent;
+  font-weight: 650;
+}
+
+.nav-file-title.is-active::after {
+  content: none;
+}
+
+.tree-item-self.is-active,
+.tree-item-self.mod-active {
+  color: var(--text-normal);
+  background: rgba(var(--faro-accent-rgb), 0.12);
+  box-shadow: inset var(--faro-active-border-width) 0 0 var(--faro-accent);
+}
+
+.nav-buttons-container {
+  gap: 4px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.nav-action-button.is-active {
+  color: var(--faro-accent);
+  background: rgba(var(--faro-accent-rgb), 0.12);
+}
+
+.faro-compact-navigation .nav-folder-title,
+.faro-compact-navigation .nav-file-title {
+  min-height: 25px;
+  font-size: var(--font-ui-smaller);
+}
+
+/* ---------- Editor and reading surface ---------- */
+
+.markdown-source-view,
+.markdown-reading-view {
+  background: var(--background-primary);
+}
+
+.markdown-source-view.mod-cm6 .cm-scroller,
+.markdown-preview-view {
+  padding-bottom: 20vh;
+}
+
+.markdown-rendered,
+.markdown-source-view.mod-cm6 .cm-content {
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-normal);
+}
+
+.markdown-source-view.mod-cm6 .cm-content {
+  caret-color: var(--caret-color);
+}
+
+.markdown-source-view.mod-cm6 .cm-active.cm-line {
+  background: linear-gradient(90deg, rgba(var(--faro-accent-rgb), 0.08), transparent 70%);
+}
+
+.faro-focus-line .markdown-source-view.mod-cm6 .cm-active.cm-line:not(.HyperMD-header) {
+  box-shadow: inset 1px 0 0 rgba(var(--faro-accent-rgb), 0.42);
+}
+
+.markdown-rendered p,
+.markdown-rendered li {
+  color: var(--text-normal);
+}
+
+.markdown-rendered p {
+  margin-block: 0 1em;
+}
+
+.inline-title {
+  color: var(--faro-h1);
+  font-family: var(--faro-heading-font);
+  font-size: 2.05em;
+  font-weight: 760;
+  letter-spacing: -0.025em;
+  line-height: 1.16;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid rgba(var(--faro-accent-rgb), 0.22);
+}
+
+/* Headings use both size and color, so they remain distinguishable with reduced color perception. */
+.markdown-rendered h1,
+.markdown-source-view.mod-cm6 .HyperMD-header-1,
+.markdown-source-view.mod-cm6 .cm-header-1 {
+  --heading-color: var(--faro-h1);
+  color: var(--faro-h1);
+}
+
+.markdown-rendered h2,
+.markdown-source-view.mod-cm6 .HyperMD-header-2,
+.markdown-source-view.mod-cm6 .cm-header-2 {
+  --heading-color: var(--faro-h2);
+  color: var(--faro-h2);
+}
+
+.markdown-rendered h3,
+.markdown-source-view.mod-cm6 .HyperMD-header-3,
+.markdown-source-view.mod-cm6 .cm-header-3 {
+  --heading-color: var(--faro-h3);
+  color: var(--faro-h3);
+}
+
+.markdown-rendered h4,
+.markdown-source-view.mod-cm6 .HyperMD-header-4,
+.markdown-source-view.mod-cm6 .cm-header-4 {
+  --heading-color: var(--faro-h4);
+  color: var(--faro-h4);
+}
+
+.markdown-rendered h5,
+.markdown-source-view.mod-cm6 .HyperMD-header-5,
+.markdown-source-view.mod-cm6 .cm-header-5 {
+  --heading-color: var(--faro-h5);
+  color: var(--faro-h5);
+}
+
+.markdown-rendered h6,
+.markdown-source-view.mod-cm6 .HyperMD-header-6,
+.markdown-source-view.mod-cm6 .cm-header-6 {
+  --heading-color: var(--faro-h6);
+  color: var(--faro-h6);
+}
+
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6,
+.markdown-source-view.mod-cm6 .HyperMD-header {
+  font-family: var(--faro-heading-font);
+  font-weight: var(--faro-heading-weight);
+  letter-spacing: -0.018em;
+  line-height: var(--line-height-tight);
+}
+
+.markdown-rendered h1,
+.markdown-source-view.mod-cm6 .HyperMD-header-1 {
+  padding-top: 1.1em;
+  padding-bottom: 0.28em;
+  border-bottom: 1px solid color-mix(in srgb, var(--faro-h1) 26%, transparent);
+}
+
+.markdown-rendered h2,
+.markdown-source-view.mod-cm6 .HyperMD-header-2 {
+  padding-top: 0.85em;
+  padding-bottom: 0.18em;
+}
+
+.markdown-rendered h2::before {
+  content: none;
+}
+
+.markdown-rendered h3,
+.markdown-source-view.mod-cm6 .HyperMD-header-3 {
+  padding-top: 0.65em;
+}
+
+/* Bands: the Noctiluca structure. */
+.faro-headings-bands .markdown-rendered h2,
+.faro-headings-bands .markdown-source-view.mod-cm6 .HyperMD-header-2 {
+  margin-inline: -0.48em;
+  padding: 0.38em 0.48em;
+  background: linear-gradient(90deg, rgba(var(--faro-accent-2-rgb), 0.105), rgba(var(--faro-accent-rgb), 0.035), transparent 82%);
+  border-top: 1px solid rgba(var(--faro-accent-2-rgb), 0.12);
+  border-bottom: 1px solid rgba(var(--faro-accent-2-rgb), 0.12);
+  border-radius: var(--radius-s);
+}
+
+.faro-headings-bands .markdown-source-view.mod-cm6 .HyperMD-header-2.cm-active {
+  background: linear-gradient(90deg, rgba(var(--faro-accent-rgb), 0.14), rgba(var(--faro-accent-2-rgb), 0.09), transparent 82%);
+}
+
+/* Editorial: the Seda structure. */
+.faro-headings-editorial .inline-title {
+  font-weight: 640;
+  letter-spacing: -0.018em;
+}
+
+.faro-headings-editorial .markdown-rendered h2,
+.faro-headings-editorial .markdown-source-view.mod-cm6 .HyperMD-header-2 {
+  padding-top: 0.72em;
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid color-mix(in srgb, var(--faro-h2) 20%, transparent);
+}
+
+/* Lines: the Marea structure. */
+.faro-headings-lines .markdown-rendered h2,
+.faro-headings-lines .markdown-source-view.mod-cm6 .HyperMD-header-2 {
+  padding-top: 0.76em;
+  padding-bottom: 0.28em;
+  background-image: linear-gradient(90deg, rgba(var(--faro-accent-rgb), 0.58), rgba(var(--faro-accent-2-rgb), 0.28), transparent 72%);
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+}
+
+.markdown-rendered strong,
+.markdown-source-view.mod-cm6 .cm-strong {
+  color: var(--faro-strong);
+  font-weight: 720;
+}
+
+.markdown-rendered em,
+.markdown-source-view.mod-cm6 .cm-em {
+  color: color-mix(in srgb, var(--faro-violet) 78%, var(--text-normal));
+}
+
+.markdown-rendered mark,
+.markdown-source-view.mod-cm6 .cm-highlight {
+  color: var(--text-normal);
+  background: linear-gradient(transparent 38%, var(--text-highlight-bg) 38%);
+  border-radius: 2px;
+  padding-inline: 0.08em;
+}
+
+.markdown-rendered a,
+.markdown-source-view.mod-cm6 .cm-link,
+.markdown-source-view.mod-cm6 .cm-hmd-internal-link {
+  text-decoration-color: color-mix(in srgb, currentColor 42%, transparent);
+  text-underline-offset: 0.16em;
+  text-decoration-thickness: 1px;
+}
+
+.external-link {
+  color: var(--faro-cyan);
+  background-image: none;
+  padding-inline-end: 0;
+}
+
+.markdown-rendered ul > li::marker,
+.markdown-rendered ol > li::marker {
+  color: var(--faro-accent-2);
+  font-weight: 700;
+}
+
+.markdown-source-view.mod-cm6 .cm-formatting-list {
+  color: var(--faro-accent-2);
+  font-weight: 700;
+}
+
+.markdown-rendered blockquote {
+  color: var(--text-muted);
+  background: linear-gradient(90deg, rgba(var(--faro-accent-rgb), 0.09), transparent 75%);
+  border-inline-start: 3px solid var(--faro-accent);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  padding: 0.65em 1em;
+}
+
+.markdown-rendered hr {
+  height: 1px;
+  margin-block: 2.2em;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--background-modifier-border-hover), transparent);
+}
+
+/* ---------- Semantic components ---------- */
+
+.tag {
+  color: color-mix(in srgb, var(--faro-violet) 86%, white);
+  background: color-mix(in srgb, var(--faro-violet) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--faro-violet) 26%, transparent);
+  border-radius: 999px;
+  font-size: 0.84em;
+  font-weight: 600;
+  padding: 0.12em 0.55em;
+}
+
+code,
+.markdown-rendered code {
+  color: color-mix(in srgb, var(--faro-blue) 82%, white);
+  background: var(--code-background);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  padding: 0.12em 0.34em;
+}
+
+pre code,
+.markdown-rendered pre code {
+  color: var(--code-normal);
+  border: 0;
+  padding: 0;
+}
+
+.markdown-rendered pre {
+  background: var(--code-background);
+  border: 1px solid var(--background-modifier-border);
+  border-inline-start: 3px solid color-mix(in srgb, var(--faro-violet) 72%, transparent);
+  border-radius: var(--radius-m);
+}
+
+.callout {
+  background: color-mix(in srgb, rgb(var(--callout-color)) 9%, var(--background-primary));
+  border: 1px solid color-mix(in srgb, rgb(var(--callout-color)) 28%, transparent);
+  border-inline-start-width: 4px;
+  border-radius: var(--radius-m);
+}
+
+.callout-title {
+  font-weight: 680;
+}
+
+.markdown-rendered table {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  border-collapse: separate;
+  border-spacing: 0;
+  background: color-mix(in srgb, var(--background-secondary) 36%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
+  overflow: hidden;
+}
+
+.markdown-rendered thead {
+  background: rgba(var(--faro-accent-rgb), 0.09);
+}
+
+.markdown-rendered th {
+  color: var(--faro-accent);
+  background: transparent;
+  font-weight: 680;
+}
+
+.markdown-rendered tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.markdown-rendered th,
+.markdown-rendered td {
+  border: 0;
+  border-inline-end: 1px solid var(--background-modifier-border);
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding: 0.55em 0.75em;
+}
+
+.markdown-rendered tr > :last-child {
+  border-inline-end: 0;
+}
+
+.markdown-rendered tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+input[type="checkbox"] {
+  border-color: var(--text-faint);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--faro-green);
+  border-color: var(--faro-green);
+}
+
+.task-list-item.is-checked > .task-list-item-checkbox + * {
+  color: var(--text-faint);
+}
+
+/* ---------- Properties ---------- */
+
+.metadata-container {
+  margin-block: 1em 2em;
+  padding: 0.75em;
+  background: color-mix(in srgb, var(--background-secondary) 68%, transparent);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+}
+
+.metadata-properties-heading {
+  color: var(--faro-accent);
+  font-weight: 680;
+}
+
+.metadata-property {
+  border-radius: var(--radius-s);
+}
+
+.metadata-property:hover {
+  background: var(--background-modifier-hover);
+}
+
+.multi-select-pill {
+  color: color-mix(in srgb, var(--faro-violet) 82%, white);
+  background: color-mix(in srgb, var(--faro-violet) 18%, transparent);
+  border-radius: 999px;
+}
+
+/* ---------- Search, outline, graph, canvas ---------- */
+
+.search-result-file-matched-text {
+  color: var(--text-normal);
+  background: var(--text-highlight-bg);
+  border-radius: 3px;
+}
+
+.outline .tree-item-self.is-active {
+  color: var(--faro-accent);
+}
+
+.graph-view.color-fill-highlight,
+.graph-view.color-line-highlight {
+  color: var(--faro-accent);
+}
+
+.canvas-node.is-focused,
+.canvas-node.is-selected {
+  --canvas-color: var(--faro-accent-rgb);
+}
+
+.canvas-node.is-selected .canvas-node-container {
+  box-shadow: 0 0 0 2px var(--faro-accent), 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Mobile and motion ---------- */
+
+.is-mobile .workspace-drawer.mod-left {
+  border-inline-end: 1px solid var(--background-modifier-border);
+}
+
+.is-mobile .inline-title {
+  font-size: 1.75em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}
+
+@media print {
+  body {
+    --background-primary: #ffffff;
+    --text-normal: #222222;
+    --text-muted: #555555;
+  }
+
+  .markdown-rendered h1,
+  .markdown-rendered h2,
+  .markdown-rendered h3,
+  .markdown-rendered h4,
+  .markdown-rendered h5,
+  .markdown-rendered h6 {
+    color: #222222;
+  }
+}
