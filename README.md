@@ -1,6 +1,6 @@
 # Faro
 
-Tema unificado para Obsidian. Faro separa el color de la estructura: cuatro esquemas completos pueden combinarse libremente con cuatro estilos de encabezados desde Style Settings.
+Tema unificado para Obsidian. Faro separa el color de la estructura: seis esquemas completos pueden combinarse libremente con cuatro estilos de encabezados desde Style Settings.
 
 ## Qué intenta resolver
 
@@ -21,13 +21,13 @@ Tema unificado para Obsidian. Faro separa el color de la estructura: cuatro esqu
 
 El tema funciona sin plugins y utiliza Faro + encabezados limpios por defecto. Con **Style Settings** aparece una sección `Faro` con:
 
-- Cuatro esquemas completos: **Faro**, **Noctiluca**, **Seda** y **Marea**.
+- Seis esquemas completos: **Faro**, **Noctiluca**, **Seda**, **Marea**, **Bruma** y **Aquelarre**.
 - Cuatro estructuras independientes: **Limpio**, **Bandas**, **Editorial serif** y **Líneas**.
 - Un modo vivo para días en los que apetece más color.
 - Línea activa, ancho de lectura, interlineado y navegación compacta.
 
-Ejemplos: `Seda + Bandas`, `Marea + Editorial serif` o `Noctiluca + Limpio`.
+Ejemplos: `Seda + Bandas`, `Marea + Editorial serif`, `Bruma + Líneas` o `Aquelarre + Bandas`.
 
 ## Estado
 
-Versión unificada (`1.0.0`). Los antiguos temas independientes se conservan como respaldo durante la migración.
+Versión `1.1.0`: seis esquemas × cuatro estructuras, con modo claro y oscuro cuidados en cada uno.

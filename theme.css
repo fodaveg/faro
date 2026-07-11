@@ -38,6 +38,12 @@ settings:
       -
         label: Marea · orgánico
         value: faro-scheme-marea
+      -
+        label: Bruma · frío
+        value: faro-scheme-bruma
+      -
+        label: Aquelarre · espectral
+        value: faro-scheme-aquelarre
   -
     id: faro-heading-style
     title: Estilo de encabezados
@@ -131,7 +137,6 @@ body {
   --faro-cyan: #77c9c5;
   --faro-green: #9ac17c;
   --faro-violet: #b49ae8;
-  --faro-pink: #dda0bd;
   --faro-red: #ef7777;
   --faro-strong: #f1cf72;
   --faro-h1: #f1cf72;
@@ -221,6 +226,30 @@ body {
 
 .theme-light {
   color-scheme: light;
+  /* Warm paper ramp: components that read --color-base-* directly stay in palette. */
+  --color-base-00: #fbf8f3;
+  --color-base-05: #f7f2ec;
+  --color-base-10: #f1ece5;
+  --color-base-20: #e9e2d9;
+  --color-base-25: #e2dacf;
+  --color-base-30: #d8cfc3;
+  --color-base-35: #c8bdae;
+  --color-base-40: #b1a597;
+  --color-base-50: #8e847b;
+  --color-base-60: #6e6660;
+  --color-base-70: #4e4843;
+  --color-base-100: #37312d;
+  /* Semantic palette retuned for the paper surface (dark tones for real contrast). */
+  --faro-accent: #bd8a1e;
+  --faro-accent-rgb: 189, 138, 30;
+  --faro-accent-2: #b3623a;
+  --faro-accent-2-rgb: 179, 98, 58;
+  --faro-strong: #8a6a12;
+  --faro-blue: #376da7;
+  --faro-cyan: #197988;
+  --faro-green: #557b35;
+  --faro-violet: #6f55a4;
+  --faro-red: #b4433f;
   --background-primary: #fbf8f3;
   --background-primary-alt: #f6f1ea;
   --background-secondary: #f1ece5;
@@ -239,7 +268,7 @@ body {
   --text-muted: #6e6660;
   --text-faint: #958c84;
   --text-on-accent: #fffdf9;
-  --text-accent: #376da7;
+  --text-accent: var(--faro-blue);
   --text-accent-hover: #254f7c;
   --text-selection: rgba(213, 163, 54, 0.24);
   --text-highlight-bg: rgba(236, 190, 72, 0.3);
@@ -255,6 +284,18 @@ body {
   --nav-item-background-active: rgba(189, 138, 30, 0.15);
   --nav-indentation-guide-color: #ddd4ca;
   --code-background: #f0ebe5;
+  /* Dark-ink syntax palette so code blocks stay on-theme on paper. */
+  --code-normal: #37312d;
+  --code-comment: #958c84;
+  --code-function: #7d4fa0;
+  --code-important: #b3623a;
+  --code-keyword: #9d6812;
+  --code-operator: #197988;
+  --code-property: #376da7;
+  --code-punctuation: #6e6660;
+  --code-string: #557b35;
+  --code-tag: #b4433f;
+  --code-value: #6f55a4;
   --faro-h1: #9d6812;
   --faro-h2: #aa533c;
   --faro-h3: #6f55a4;
@@ -280,7 +321,6 @@ body.theme-dark.faro-scheme-noctiluca {
   --faro-cyan: #78dce8;
   --faro-green: #a9dc76;
   --faro-violet: #b49cff;
-  --faro-pink: #ff7aa8;
   --faro-red: #ff667d;
   --faro-strong: #ffd866;
   --faro-h1: #ff7aa8;
@@ -353,7 +393,6 @@ body.theme-dark.faro-scheme-seda {
   --faro-cyan: #91a5b8;
   --faro-green: #9baa93;
   --faro-violet: #b9a0ac;
-  --faro-pink: #b9a0ac;
   --faro-red: #c98f87;
   --faro-strong: #d8c79d;
   --faro-h1: #cdbb8b;
@@ -426,7 +465,6 @@ body.theme-dark.faro-scheme-marea {
   --faro-cyan: #7eb9ad;
   --faro-green: #9ab68e;
   --faro-violet: #b5a0c9;
-  --faro-pink: #e08a6c;
   --faro-red: #df786f;
   --faro-strong: #d7bd78;
   --faro-h1: #e08a6c;
@@ -489,6 +527,160 @@ body.theme-dark.faro-scheme-marea {
   --code-value: #bea9ce;
 }
 
+/*
+Bruma: the lighthouse seen through cold fog. A slate-blue near-black canvas and
+icy, desaturated structure, cut by a single warm amber beam (H1, bold, markers).
+It is the cold counterpoint to the four warm/neon schemes.
+*/
+body.theme-dark.faro-scheme-bruma {
+  --faro-deep-bg: #131519;
+  --faro-accent: #7fb0d4;
+  --faro-accent-rgb: 127, 176, 212;
+  --faro-accent-2: #d79b63;
+  --faro-accent-2-rgb: 215, 155, 99;
+  --faro-blue: #85b4d6;
+  --faro-cyan: #7fc0bd;
+  --faro-green: #9fb69a;
+  --faro-violet: #aab0d2;
+  --faro-red: #d98a86;
+  --faro-strong: #e6c79a;
+  --faro-h1: #dfa96f;
+  --faro-h2: #85b4d6;
+  --faro-h3: #aab0d2;
+  --faro-h4: #7fc0bd;
+  --faro-h5: #9fb69a;
+  --faro-h6: #adb2bc;
+  --color-base-00: #131519;
+  --color-base-05: #15181d;
+  --color-base-10: #191d23;
+  --color-base-20: #1e232b;
+  --color-base-25: #242a33;
+  --color-base-30: #2e3540;
+  --color-base-35: #39414e;
+  --color-base-40: #4c5565;
+  --color-base-50: #67717f;
+  --color-base-60: #8b95a2;
+  --color-base-70: #b0b8c2;
+  --color-base-100: #e2e6ec;
+  --background-primary: #131519;
+  --background-primary-alt: #16191f;
+  --background-secondary: #191d23;
+  --background-secondary-alt: #1e232b;
+  --background-modifier-border: #2a313b;
+  --background-modifier-border-hover: #3b4350;
+  --background-modifier-form-field: #1b1f27;
+  --background-modifier-message: #212732;
+  --interactive-normal: #202631;
+  --interactive-hover: #2a313d;
+  --interactive-accent-hover: #97c1de;
+  --text-normal: #dde2e8;
+  --text-muted: #a2a9b4;
+  --text-faint: #6f7681;
+  --text-on-accent: #10161c;
+  --text-accent-hover: #a7d3ea;
+  --text-highlight-bg: rgba(215, 155, 99, 0.24);
+  --titlebar-background: #101216;
+  --titlebar-background-focused: #131519;
+  --tab-container-background: #101216;
+  --divider-color: #2a313b;
+  --nav-item-color: #b2b9c3;
+  --nav-item-color-hover: #eaeef3;
+  --nav-item-color-active: #f2f6fb;
+  --nav-indentation-guide-color: #313945;
+  --metadata-label-text-color: #969eaa;
+  --metadata-input-text-color: #dce1e7;
+  --metadata-input-background-active: #1c212a;
+  --code-background: #181c23;
+  --code-normal: #d6dbe2;
+  --code-comment: #6d7581;
+  --code-function: #aab0d2;
+  --code-important: #df8f89;
+  --code-keyword: #dca36e;
+  --code-operator: #7fc0bd;
+  --code-property: #85b4d6;
+  --code-punctuation: #a2a9b4;
+  --code-string: #9fb69a;
+  --code-tag: #d98a86;
+  --code-value: #b3a9d4;
+}
+
+/*
+Aquelarre: a Halloween scheme. Deep-purple near-black canvas with a pumpkin accent,
+and headings spread across an affine palette — pumpkin, poison green, ghost lavender,
+candle amber, spectral teal and mauve. Bold glows like candlelight; markers are witch violet.
+*/
+body.theme-dark.faro-scheme-aquelarre {
+  --faro-deep-bg: #17121f;
+  --faro-accent: #f0842f;
+  --faro-accent-rgb: 240, 132, 47;
+  --faro-accent-2: #a874d6;
+  --faro-accent-2-rgb: 168, 116, 214;
+  --faro-blue: #9a8fe6;
+  --faro-cyan: #5fc2a8;
+  --faro-green: #93c94f;
+  --faro-violet: #bb93e6;
+  --faro-red: #e8635f;
+  --faro-strong: #f0b24f;
+  --faro-h1: #f0842f;
+  --faro-h2: #93c94f;
+  --faro-h3: #bb93e6;
+  --faro-h4: #f0b45a;
+  --faro-h5: #5fc2a8;
+  --faro-h6: #c093bb;
+  --color-base-00: #17121f;
+  --color-base-05: #1a1522;
+  --color-base-10: #1f1928;
+  --color-base-20: #251d30;
+  --color-base-25: #2c2338;
+  --color-base-30: #382c47;
+  --color-base-35: #443556;
+  --color-base-40: #58466d;
+  --color-base-50: #746189;
+  --color-base-60: #9787a8;
+  --color-base-70: #b8abc5;
+  --color-base-100: #e9e3ee;
+  --background-primary: #17121f;
+  --background-primary-alt: #1a1522;
+  --background-secondary: #1f1928;
+  --background-secondary-alt: #251d30;
+  --background-modifier-border: #322842;
+  --background-modifier-border-hover: #453a58;
+  --background-modifier-form-field: #211a2b;
+  --background-modifier-message: #292135;
+  --interactive-normal: #241d30;
+  --interactive-hover: #2f2640;
+  --interactive-accent-hover: #f89a4f;
+  --text-normal: #e7e0ea;
+  --text-muted: #b0a6b8;
+  --text-faint: #78707f;
+  --text-on-accent: #2a1206;
+  --text-accent-hover: #c9b6ef;
+  --text-highlight-bg: rgba(240, 132, 47, 0.22);
+  --titlebar-background: #130f1a;
+  --titlebar-background-focused: #17121f;
+  --tab-container-background: #130f1a;
+  --divider-color: #322842;
+  --nav-item-color: #bcb0c6;
+  --nav-item-color-hover: #f0eaf4;
+  --nav-item-color-active: #fef3e9;
+  --nav-indentation-guide-color: #3a2f4b;
+  --metadata-label-text-color: #9c92a6;
+  --metadata-input-text-color: #e2dce7;
+  --metadata-input-background-active: #221b2c;
+  --code-background: #1e1828;
+  --code-normal: #ded7e4;
+  --code-comment: #776f83;
+  --code-function: #bb93e6;
+  --code-important: #ef7a63;
+  --code-keyword: #f0842f;
+  --code-operator: #5fc2a8;
+  --code-property: #9a8fe6;
+  --code-punctuation: #b0a6b8;
+  --code-string: #93c94f;
+  --code-tag: #e8635f;
+  --code-value: #c093d6;
+}
+
 /* Light mode keeps the warm paper surface and changes only the semantic palette. */
 body.theme-light.faro-scheme-noctiluca {
   --faro-accent: #bb386b;
@@ -544,6 +736,44 @@ body.theme-light.faro-scheme-marea {
   --faro-h6: #687069;
 }
 
+body.theme-light.faro-scheme-bruma {
+  --faro-accent: #3f6f97;
+  --faro-accent-rgb: 63, 111, 151;
+  --faro-accent-2: #a8632a;
+  --faro-accent-2-rgb: 168, 99, 42;
+  --faro-blue: #3f6f97;
+  --faro-cyan: #2f7d78;
+  --faro-green: #557b35;
+  --faro-violet: #5c5f92;
+  --faro-red: #b0463f;
+  --faro-strong: #8a6a2f;
+  --faro-h1: #a8632a;
+  --faro-h2: #3f6f97;
+  --faro-h3: #5c5f92;
+  --faro-h4: #2f7d78;
+  --faro-h5: #557b35;
+  --faro-h6: #5b6069;
+}
+
+body.theme-light.faro-scheme-aquelarre {
+  --faro-accent: #c25e12;
+  --faro-accent-rgb: 194, 94, 18;
+  --faro-accent-2: #7a4bb0;
+  --faro-accent-2-rgb: 122, 75, 176;
+  --faro-blue: #5b4fb0;
+  --faro-cyan: #2f8069;
+  --faro-green: #5b7a24;
+  --faro-violet: #6f4ba0;
+  --faro-red: #c0433c;
+  --faro-strong: #9a6210;
+  --faro-h1: #c25e12;
+  --faro-h2: #5b7a24;
+  --faro-h3: #6f4ba0;
+  --faro-h4: #9a6210;
+  --faro-h5: #2f8069;
+  --faro-h6: #8a4f80;
+}
+
 body.faro-vivid {
   --faro-heading-weight: 760;
 }
@@ -554,12 +784,22 @@ body.faro-vivid.theme-dark {
   --text-highlight-bg: rgba(var(--faro-accent-rgb), 0.33);
 }
 
-body.faro-vivid .inline-title,
-body.faro-vivid .markdown-rendered h1,
-body.faro-vivid .markdown-rendered h2,
-body.faro-vivid .markdown-rendered h3,
-body.faro-vivid .markdown-source-view.mod-cm6 .HyperMD-header {
-  text-shadow: 0 0 22px color-mix(in srgb, currentColor 15%, transparent);
+/*
+Vivid backlight (dark only): a two-stop bloom. The tight near ring keeps the glyph
+edges crisp; the wider soft halo reads as a light source behind the title. This
+replaces the old single 22px haze that blurred the letters and felt dizzying. On the
+paper surface a glow behind dark headings only smudges, so it stays dark-only.
+*/
+body.faro-vivid.theme-dark .inline-title,
+body.faro-vivid.theme-dark .markdown-rendered h1,
+body.faro-vivid.theme-dark .markdown-rendered h2,
+body.faro-vivid.theme-dark .markdown-rendered h3,
+body.faro-vivid.theme-dark .markdown-source-view.mod-cm6 .HyperMD-header-1,
+body.faro-vivid.theme-dark .markdown-source-view.mod-cm6 .HyperMD-header-2,
+body.faro-vivid.theme-dark .markdown-source-view.mod-cm6 .HyperMD-header-3 {
+  text-shadow:
+    0 0 4px color-mix(in srgb, currentColor 24%, transparent),
+    0 0 15px color-mix(in srgb, currentColor 10%, transparent);
 }
 
 body.faro-headings-editorial {
@@ -750,7 +990,7 @@ button.mod-cta {
   caret-color: var(--caret-color);
 }
 
-.markdown-source-view.mod-cm6 .cm-active.cm-line {
+.faro-focus-line .markdown-source-view.mod-cm6 .cm-active.cm-line {
   background: linear-gradient(90deg, rgba(var(--faro-accent-rgb), 0.08), transparent 70%);
 }
 
@@ -928,6 +1168,13 @@ button.mod-cta {
   padding-inline-end: 0;
 }
 
+/* Unresolved internal links signal with the palette's red instead of the default. */
+.markdown-rendered a.is-unresolved,
+.markdown-source-view.mod-cm6 .cm-hmd-internal-link.is-unresolved {
+  color: var(--faro-red);
+  text-decoration-color: color-mix(in srgb, var(--faro-red) 42%, transparent);
+}
+
 .markdown-rendered ul > li::marker,
 .markdown-rendered ol > li::marker {
   color: var(--faro-accent-2);
@@ -957,7 +1204,7 @@ button.mod-cta {
 /* ---------- Semantic components ---------- */
 
 .tag {
-  color: color-mix(in srgb, var(--faro-violet) 86%, white);
+  color: color-mix(in srgb, var(--faro-violet) 86%, var(--text-normal));
   background: color-mix(in srgb, var(--faro-violet) 15%, transparent);
   border: 1px solid color-mix(in srgb, var(--faro-violet) 26%, transparent);
   border-radius: 999px;
@@ -968,7 +1215,7 @@ button.mod-cta {
 
 code,
 .markdown-rendered code {
-  color: color-mix(in srgb, var(--faro-blue) 82%, white);
+  color: color-mix(in srgb, var(--faro-blue) 82%, var(--text-normal));
   background: var(--code-background);
   border: 1px solid var(--background-modifier-border);
   border-radius: 5px;
@@ -1006,7 +1253,6 @@ pre code,
   border-collapse: separate;
   border-spacing: 0;
   background: color-mix(in srgb, var(--background-secondary) 36%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
   overflow: hidden;
 }
 
@@ -1021,7 +1267,7 @@ pre code,
 }
 
 .markdown-rendered tr:nth-child(even) td {
-  background: rgba(255, 255, 255, 0.018);
+  background: color-mix(in srgb, var(--color-base-100) 3%, transparent);
 }
 
 .markdown-rendered th,
@@ -1077,7 +1323,7 @@ input[type="checkbox"]:checked {
 }
 
 .multi-select-pill {
-  color: color-mix(in srgb, var(--faro-violet) 82%, white);
+  color: color-mix(in srgb, var(--faro-violet) 82%, var(--text-normal));
   background: color-mix(in srgb, var(--faro-violet) 18%, transparent);
   border-radius: 999px;
 }
@@ -1118,6 +1364,12 @@ input[type="checkbox"]:checked {
   font-size: 1.75em;
 }
 
+/* On mobile there is a single pane, so the active-leaf accent underline just
+   reads as a stray floating line under the header. Drop it. */
+.is-mobile .workspace-leaf.mod-active .view-header {
+  box-shadow: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1132,8 +1384,19 @@ input[type="checkbox"]:checked {
 @media print {
   body {
     --background-primary: #ffffff;
-    --text-normal: #222222;
+    --background-secondary: #ffffff;
+    --text-normal: #1a1a1a;
     --text-muted: #555555;
+    /* Neutralise the accent so its tinted fills (table head, blockquote bar,
+       highlights) print as faint ink instead of colour. */
+    --faro-accent: #222222;
+    --faro-accent-rgb: 34, 34, 34;
+    --faro-accent-2: #444444;
+    --faro-accent-2-rgb: 68, 68, 68;
+    --faro-strong: #000000;
+    --text-highlight-bg: rgba(0, 0, 0, 0.12);
+    --code-background: #f3f3f3;
+    --code-normal: #1a1a1a;
   }
 
   .markdown-rendered h1,
@@ -1142,6 +1405,6 @@ input[type="checkbox"]:checked {
   .markdown-rendered h4,
   .markdown-rendered h5,
   .markdown-rendered h6 {
-    color: #222222;
+    color: #1a1a1a;
   }
 }
