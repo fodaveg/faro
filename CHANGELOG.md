@@ -1,5 +1,31 @@
 # Changelog — Faro
 
+## 1.2.0
+
+Accesibilidad: contraste WCAG AA en toda la paleta, foco desacoplado y gate de medición.
+
+### Contraste (AA en todos los pares reales)
+- **Foco desacoplado del acento** (`--faro-focus`): el anillo de `:focus-visible` ya
+  no depende del acento. En el esquema «faro» claro (donde el acento daba 2.91:1)
+  usa un oro más profundo que garantiza el mínimo de 3:1; el resto de esquemas
+  conservan foco = su acento.
+- **Sintaxis de código (`--code-*`) a AA** en claro y oscuro (comentarios, keywords,
+  strings, operadores… más profundos, conservando el tono).
+- **Etiqueta del botón CTA en claro** pasa a tinta oscura sobre el oro: el blanco
+  sobre oro claro no llegaba a 4.5:1.
+- Ajustes de `faro-accent-2` (etiquetas), `h5` de Aquelarre y otros tonos que
+  rozaban el umbral. Ningún par real queda bajo AA (solo `text-faint`, incidental).
+
+### Tokens
+- Definidos `--icon-color`/`-hover`/`-active` y `--metadata-label-text-color` en
+  modo claro (antes caían al default de Obsidian, fuera de paleta).
+- **Trío `--accent-h/s/l` por esquema**: evita que los plugins que calculan con
+  `hsl(var(--accent-h)…)` se pinten con el morado por defecto de Obsidian.
+
+### Herramientas
+- Gate de contraste (`hooks/pre-commit`): mide WCAG AA + higiene CSS antes de cada
+  commit; un par bajo AA o un esquema sin medir aborta el commit.
+
 ## 1.1.0
 
 Ampliación de esquemas y saneado del modo claro.
