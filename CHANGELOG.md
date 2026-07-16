@@ -2,6 +2,11 @@
 
 ## Sin publicar
 
+- **4 esquemas de color nuevos** (ahora 10): **Grafito** (sobrio, casi monocromo azul-acero),
+  **Musgo** (verdes de bosque + ámbar), **Sintética** (synthwave magenta/cian) y **Ácido**
+  (lima ácido + magenta, máxima intensidad). Todos con modo claro y oscuro, compatibles con las
+  4 estructuras de encabezado y el modo vivo, y **verificados AA** (0 pares bajo el mínimo).
+
 - **La guía de línea activa se muestra por defecto**, sin depender de tener Style
   Settings instalado, y con más presencia en modo claro (antes se lavaba sobre el
   papel). El toggle pasa a ser de apagado (`faro-focus-line-off`, «Sin resaltar la
