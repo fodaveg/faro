@@ -1,5 +1,12 @@
 # Changelog — Faro
 
+## Sin publicar
+
+- **La guía de línea activa se muestra por defecto**, sin depender de tener Style
+  Settings instalado, y con más presencia en modo claro (antes se lavaba sobre el
+  papel). El toggle pasa a ser de apagado (`faro-focus-line-off`, «Sin resaltar la
+  línea activa»).
+
 ## 1.2.0
 
 Accesibilidad: contraste WCAG AA en toda la paleta, foco desacoplado y gate de medición.

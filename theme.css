@@ -71,11 +71,11 @@ settings:
     type: class-toggle
     addCommand: true
   -
-    id: faro-focus-line
-    title: Resaltar la línea activa
-    description: Añade una guía tenue a la línea que estás editando.
+    id: faro-focus-line-off
+    title: Sin resaltar la línea activa
+    description: Quita la guía tenue de la línea que estás editando. La guía se muestra por defecto, aunque no tengas Style Settings.
     type: class-toggle
-    default: true
+    default: false
   -
     id: faro-layout-heading
     title: Lectura
@@ -1031,12 +1031,31 @@ button.mod-cta {
   caret-color: var(--caret-color);
 }
 
-.faro-focus-line .markdown-source-view.mod-cm6 .cm-active.cm-line {
+/* Subtle active-line guide, shown by default so it does not depend on Style
+   Settings being installed. Removable with the faro-focus-line-off toggle. */
+.markdown-source-view.mod-cm6 .cm-active.cm-line {
   background: linear-gradient(90deg, rgba(var(--faro-accent-rgb), 0.08), transparent 70%);
 }
 
-.faro-focus-line .markdown-source-view.mod-cm6 .cm-active.cm-line:not(.HyperMD-header) {
+.markdown-source-view.mod-cm6 .cm-active.cm-line:not(.HyperMD-header) {
   box-shadow: inset 1px 0 0 rgba(var(--faro-accent-rgb), 0.42);
+}
+
+/* Light mode: the accent over pale paper washes out, so the guide needs a
+   heavier tint and bar to stay visible. */
+body.theme-light .markdown-source-view.mod-cm6 .cm-active.cm-line {
+  background: linear-gradient(90deg, rgba(var(--faro-accent-rgb), 0.18), transparent 72%);
+}
+
+body.theme-light .markdown-source-view.mod-cm6 .cm-active.cm-line:not(.HyperMD-header) {
+  box-shadow: inset 2px 0 0 rgba(var(--faro-accent-rgb), 0.62);
+}
+
+/* Off toggle wins over both base and the light overrides (placed last, equal
+   specificity). */
+body.faro-focus-line-off .markdown-source-view.mod-cm6 .cm-active.cm-line {
+  background: none;
+  box-shadow: none;
 }
 
 .markdown-rendered p,
