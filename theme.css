@@ -1411,6 +1411,15 @@ input[type="checkbox"]:checked {
   box-shadow: none;
 }
 
+/* Touch targets: the desktop nav rows are 30px (25px under compact navigation),
+   below the 44px minimum for touch. Restore 44px on mobile regardless of the
+   compact toggle. Placed after the compact rule so equal-specificity source
+   order wins; font-size from compact still applies, only the height is floored. */
+.is-mobile .nav-folder-title,
+.is-mobile .nav-file-title {
+  min-height: 44px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
