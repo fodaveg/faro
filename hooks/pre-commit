@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+# Gate de contraste + higiene para los temas Obsidian.
+# Corre el checker WCAG y el linter del repo hermano `tools/` sobre ESTE tema.
+# Si algo cae por debajo de AA o rompe la higiene (o si se añade un esquema sin
+# medirlo), el commit se ABORTA. Así el contraste es un gate de verdad, no algo
+# que se ejecuta una vez y se olvida.
+#
+# Instalar (una vez por repo):  bash hooks/install.sh
+# Saltar puntualmente:          git commit --no-verify
+#
+set -euo pipefail
+
+REPO="$(git rev-parse --show-toplevel)"
+THEME="$(basename "$REPO")"          # "faro" o "monolito"
+TOOLS="$REPO/../tools"
+
+if [ ! -f "$TOOLS/contrast.mjs" ]; then
+  echo "⚠️  pre-commit: no encuentro ../tools/contrast.mjs (layout de desarrollo ausente); salto el gate." >&2
+  exit 0
+fi
+
+fail=0
+echo "· pre-commit: contraste AA de '$THEME'…" >&2
+node "$TOOLS/contrast.mjs" --theme "$THEME" >/dev/null 2>&1 || fail=1
+echo "· pre-commit: higiene CSS de '$THEME'…" >&2
+node "$TOOLS/lint.mjs" --theme "$THEME" >/dev/null 2>&1 || fail=1
+
+if [ "$fail" -ne 0 ]; then
+  echo "" >&2
+  echo "✗ Gate FALLIDO en '$THEME'. Detalle:" >&2
+  echo "    node tools/contrast.mjs --theme $THEME --fails" >&2
+  echo "    node tools/lint.mjs --theme $THEME" >&2
+  echo "  Arréglalo, o salta con:  git commit --no-verify" >&2
+  exit 1
+fi
+
+echo "✓ pre-commit: '$THEME' pasa contraste AA + higiene." >&2
+exit 0
