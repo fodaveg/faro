@@ -184,6 +184,12 @@ body {
   --interactive-hover: #302e39;
   --interactive-accent: var(--faro-accent);
   --interactive-accent-hover: #f1d17f;
+  /* Trío HSL del acento de Obsidian, por esquema: sin esto, cualquier plugin
+     que calcule con hsl(var(--accent-h)…) se pinta con el morado por defecto.
+     Sigue al acento de relleno (interactive-accent); default = esquema «faro». */
+  --accent-h: 43;
+  --accent-s: 74%;
+  --accent-l: 66%;
   --text-normal: #e4dfd9;
   --text-muted: #aaa4af;
   --text-faint: #76717e;
@@ -249,6 +255,10 @@ body {
   --faro-accent-2-rgb: 171, 93, 55;
   /* Light «faro» accent is 2.91:1 on paper — too weak for a focus ring. Deepen it. */
   --faro-focus: #9c6f16;
+  /* Acento de relleno en claro es #bd8a1e uniforme en los 6 esquemas → un solo trío. */
+  --accent-h: 41;
+  --accent-s: 73%;
+  --accent-l: 43%;
   --faro-strong: #8a6a12;
   --faro-blue: #376da7;
   --faro-cyan: #197988;
@@ -272,6 +282,12 @@ body {
   --text-normal: #37312d;
   --text-muted: #6e6660;
   --text-faint: #958c84;
+  /* Iconos y etiquetas de metadatos: sin esto caían al default de Obsidian
+     (invisibles de medir y fuera de paleta) solo en modo claro. */
+  --icon-color: #7a7168;
+  --icon-color-hover: #4e4843;
+  --icon-color-active: var(--faro-focus);
+  --metadata-label-text-color: #6e6660;
   --text-on-accent: #1e1505;
   --text-accent: var(--faro-blue);
   --text-accent-hover: #254f7c;
@@ -320,6 +336,9 @@ body.theme-dark.faro-scheme-noctiluca {
   --faro-deep-bg: #11131f;
   --faro-accent: #ff7aa8;
   --faro-accent-rgb: 255, 122, 168;
+  --accent-h: 339;
+  --accent-s: 100%;
+  --accent-l: 74%;
   --faro-accent-2: #78dce8;
   --faro-accent-2-rgb: 120, 220, 232;
   --faro-blue: #82aaff;
@@ -392,6 +411,9 @@ body.theme-dark.faro-scheme-seda {
   --faro-deep-bg: #171719;
   --faro-accent: #cdbb8b;
   --faro-accent-rgb: 205, 187, 139;
+  --accent-h: 44;
+  --accent-s: 40%;
+  --accent-l: 67%;
   --faro-accent-2: #c1967d;
   --faro-accent-2-rgb: 193, 150, 125;
   --faro-blue: #91a5b8;
@@ -464,6 +486,9 @@ body.theme-dark.faro-scheme-marea {
   --faro-deep-bg: #101918;
   --faro-accent: #e08a6c;
   --faro-accent-rgb: 224, 138, 108;
+  --accent-h: 16;
+  --accent-s: 65%;
+  --accent-l: 65%;
   --faro-accent-2: #7eb9ad;
   --faro-accent-2-rgb: 126, 185, 173;
   --faro-blue: #7eb9ad;
@@ -541,6 +566,9 @@ body.theme-dark.faro-scheme-bruma {
   --faro-deep-bg: #131519;
   --faro-accent: #7fb0d4;
   --faro-accent-rgb: 127, 176, 212;
+  --accent-h: 205;
+  --accent-s: 50%;
+  --accent-l: 66%;
   --faro-accent-2: #d79b63;
   --faro-accent-2-rgb: 215, 155, 99;
   --faro-blue: #85b4d6;
@@ -618,6 +646,9 @@ body.theme-dark.faro-scheme-aquelarre {
   --faro-deep-bg: #17121f;
   --faro-accent: #f0842f;
   --faro-accent-rgb: 240, 132, 47;
+  --accent-h: 26;
+  --accent-s: 87%;
+  --accent-l: 56%;
   --faro-accent-2: #a874d6;
   --faro-accent-2-rgb: 168, 116, 214;
   --faro-blue: #9a8fe6;
