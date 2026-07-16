@@ -2,5 +2,6 @@
   "name": "Faro",
   "version": "1.2.0",
   "minAppVersion": "1.6.0",
-  "author": "David"
+  "author": "David",
+  "authorUrl": "https://fodaveg.net"
 }
