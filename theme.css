@@ -245,8 +245,8 @@ body {
   /* Semantic palette retuned for the paper surface (dark tones for real contrast). */
   --faro-accent: #bd8a1e;
   --faro-accent-rgb: 189, 138, 30;
-  --faro-accent-2: #b3623a;
-  --faro-accent-2-rgb: 179, 98, 58;
+  --faro-accent-2: #ab5d37;
+  --faro-accent-2-rgb: 171, 93, 55;
   /* Light «faro» accent is 2.91:1 on paper — too weak for a focus ring. Deepen it. */
   --faro-focus: #9c6f16;
   --faro-strong: #8a6a12;
@@ -272,7 +272,7 @@ body {
   --text-normal: #37312d;
   --text-muted: #6e6660;
   --text-faint: #958c84;
-  --text-on-accent: #fffdf9;
+  --text-on-accent: #1e1505;
   --text-accent: var(--faro-blue);
   --text-accent-hover: #254f7c;
   --text-selection: rgba(213, 163, 54, 0.24);
@@ -748,8 +748,8 @@ body.theme-light.faro-scheme-bruma {
   --faro-accent: #3f6f97;
   --faro-accent-rgb: 63, 111, 151;
   --faro-focus: var(--faro-accent);
-  --faro-accent-2: #a8632a;
-  --faro-accent-2-rgb: 168, 99, 42;
+  --faro-accent-2: #a56129;
+  --faro-accent-2-rgb: 165, 97, 41;
   --faro-blue: #3f6f97;
   --faro-cyan: #2f7d78;
   --faro-green: #557b35;
@@ -780,7 +780,7 @@ body.theme-light.faro-scheme-aquelarre {
   --faro-h2: #5b7a24;
   --faro-h3: #6f4ba0;
   --faro-h4: #9a6210;
-  --faro-h5: #2f8069;
+  --faro-h5: #2f7f68;
   --faro-h6: #8a4f80;
 }
 
