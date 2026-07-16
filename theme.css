@@ -133,6 +133,9 @@ body {
   --faro-accent-rgb: 233, 196, 106;
   --faro-accent-2: #e98a5f;
   --faro-accent-2-rgb: 233, 138, 95;
+  /* Focus ring: follows the accent by default; overridden per-scheme only where
+     the accent can't clear the 3:1 focus-indicator floor (light «faro» default). */
+  --faro-focus: var(--faro-accent);
   --faro-blue: #86b7ff;
   --faro-cyan: #77c9c5;
   --faro-green: #9ac17c;
@@ -212,7 +215,7 @@ body {
   --metadata-input-background-active: #211f28;
   --code-background: #201f27;
   --code-normal: #d9d3cc;
-  --code-comment: #787481;
+  --code-comment: #898691;
   --code-function: #d9a5df;
   --code-important: #ef8c79;
   --code-keyword: #ecab72;
@@ -244,6 +247,8 @@ body {
   --faro-accent-rgb: 189, 138, 30;
   --faro-accent-2: #b3623a;
   --faro-accent-2-rgb: 179, 98, 58;
+  /* Light «faro» accent is 2.91:1 on paper — too weak for a focus ring. Deepen it. */
+  --faro-focus: #9c6f16;
   --faro-strong: #8a6a12;
   --faro-blue: #376da7;
   --faro-cyan: #197988;
@@ -286,14 +291,14 @@ body {
   --code-background: #f0ebe5;
   /* Dark-ink syntax palette so code blocks stay on-theme on paper. */
   --code-normal: #37312d;
-  --code-comment: #958c84;
+  --code-comment: #706963;
   --code-function: #7d4fa0;
-  --code-important: #b3623a;
-  --code-keyword: #9d6812;
-  --code-operator: #197988;
+  --code-important: #9c5633;
+  --code-keyword: #8f5e10;
+  --code-operator: #187381;
   --code-property: #376da7;
   --code-punctuation: #6e6660;
-  --code-string: #557b35;
+  --code-string: #4f7231;
   --code-tag: #b4433f;
   --code-value: #6f55a4;
   --faro-h1: #9d6812;
@@ -371,7 +376,7 @@ body.theme-dark.faro-scheme-noctiluca {
   --metadata-input-background-active: #1b1f31;
   --code-background: #181b2b;
   --code-normal: #dce0ee;
-  --code-comment: #737b98;
+  --code-comment: #7c839f;
   --code-function: #d7a6ff;
   --code-important: #ff8297;
   --code-keyword: #ff9e64;
@@ -443,7 +448,7 @@ body.theme-dark.faro-scheme-seda {
   --metadata-input-background-active: #232428;
   --code-background: #202124;
   --code-normal: #d7d3cd;
-  --code-comment: #79797c;
+  --code-comment: #88888b;
   --code-function: #b9a0ac;
   --code-important: #c98f87;
   --code-keyword: #c1967d;
@@ -515,7 +520,7 @@ body.theme-dark.faro-scheme-marea {
   --metadata-input-background-active: #1a2825;
   --code-background: #172321;
   --code-normal: #d5dfd8;
-  --code-comment: #71817b;
+  --code-comment: #7d8c86;
   --code-function: #b5a0c9;
   --code-important: #e58e75;
   --code-keyword: #d9a071;
@@ -592,7 +597,7 @@ body.theme-dark.faro-scheme-bruma {
   --metadata-input-background-active: #1c212a;
   --code-background: #181c23;
   --code-normal: #d6dbe2;
-  --code-comment: #6d7581;
+  --code-comment: #7e8590;
   --code-function: #aab0d2;
   --code-important: #df8f89;
   --code-keyword: #dca36e;
@@ -669,7 +674,7 @@ body.theme-dark.faro-scheme-aquelarre {
   --metadata-input-background-active: #221b2c;
   --code-background: #1e1828;
   --code-normal: #ded7e4;
-  --code-comment: #776f83;
+  --code-comment: #888192;
   --code-function: #bb93e6;
   --code-important: #ef7a63;
   --code-keyword: #f0842f;
@@ -685,6 +690,7 @@ body.theme-dark.faro-scheme-aquelarre {
 body.theme-light.faro-scheme-noctiluca {
   --faro-accent: #bb386b;
   --faro-accent-rgb: 187, 56, 107;
+  --faro-focus: var(--faro-accent);
   --faro-accent-2: #197988;
   --faro-accent-2-rgb: 25, 121, 136;
   --faro-blue: #376da7;
@@ -703,6 +709,7 @@ body.theme-light.faro-scheme-noctiluca {
 body.theme-light.faro-scheme-seda {
   --faro-accent: #8a7340;
   --faro-accent-rgb: 138, 115, 64;
+  --faro-focus: var(--faro-accent);
   --faro-accent-2: #845c46;
   --faro-accent-2-rgb: 132, 92, 70;
   --faro-blue: #526f86;
@@ -721,6 +728,7 @@ body.theme-light.faro-scheme-seda {
 body.theme-light.faro-scheme-marea {
   --faro-accent: #b75f44;
   --faro-accent-rgb: 183, 95, 68;
+  --faro-focus: var(--faro-accent);
   --faro-accent-2: #3d7c70;
   --faro-accent-2-rgb: 61, 124, 112;
   --faro-blue: #3d7c70;
@@ -739,6 +747,7 @@ body.theme-light.faro-scheme-marea {
 body.theme-light.faro-scheme-bruma {
   --faro-accent: #3f6f97;
   --faro-accent-rgb: 63, 111, 151;
+  --faro-focus: var(--faro-accent);
   --faro-accent-2: #a8632a;
   --faro-accent-2-rgb: 168, 99, 42;
   --faro-blue: #3f6f97;
@@ -758,6 +767,7 @@ body.theme-light.faro-scheme-bruma {
 body.theme-light.faro-scheme-aquelarre {
   --faro-accent: #c25e12;
   --faro-accent-rgb: 194, 94, 18;
+  --faro-focus: var(--faro-accent);
   --faro-accent-2: #7a4bb0;
   --faro-accent-2-rgb: 122, 75, 176;
   --faro-blue: #5b4fb0;
@@ -896,7 +906,7 @@ button.mod-cta {
 }
 
 :focus-visible {
-  outline: 2px solid var(--faro-accent);
+  outline: 2px solid var(--faro-focus);
   outline-offset: 2px;
 }
 
