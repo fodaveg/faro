@@ -1,0 +1,8 @@
+# Metadatos de carpeta de Finder (macOS)
+.DS_Store
+._*
+
+# Basura de editores
+.vscode/
+.idea/
+*.swp
